@@ -1,8 +1,21 @@
 import { Container, Divider, Text, Title } from "@mantine/core";
 
+
+export const apiKey = {
+  weatherKey: process.env.NEXT_PUBLIC_WEATHER_API_KEY
+}
+
 export default function IndexPage() {
 
   const linkage = ['and', 'but' ]
+
+  // use the api key to fetch data from the weather api
+  const { data, error } = useSWR(
+    `https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${apiKey.weatherKey}`,
+    fetcher
+  )
+  console.log(data)
+
 
   return (
     <Container fluid sx={(theme) => ({ backgroundColor: theme.colors.blue[4], height: "100vh", padding: '0' })}>
